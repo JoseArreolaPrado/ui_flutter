@@ -193,7 +193,7 @@ class _CurveHeaderPainter extends CustomPainter {
 class WaveHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: double.infinity,
       child: CustomPaint(
@@ -206,10 +206,27 @@ class WaveHeader extends StatelessWidget {
 class _WaveHeaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
+    final Rect rect = Rect.fromCircle(
+      center: const Offset(0.0, 55.0),
+      radius: 180,
+    );
+    const Gradient gradient = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: <Color>[
+          Color(0xff6D05E8),
+          Color(0xffC012FF),
+          Color(0xff6D05FA),
+        ],
+        stops: [
+          0.0,
+          0.5,
+          1.0
+        ]);
+    final paint = Paint()..shader = gradient.createShader(rect);
 
     //Properties
-    paint.color = const Color(0xff615AAB);
+    // paint.color = const Color(0xff615AAB);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 20;
 
