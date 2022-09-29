@@ -28,6 +28,7 @@ class _AnimatedSquareState extends State<AnimatedSquare>
   late AnimationController controller;
 
   late Animation<double> rotation;
+  late Animation<double> opacity;
 
   @override
   void initState() {
@@ -36,12 +37,16 @@ class _AnimatedSquareState extends State<AnimatedSquare>
       duration: const Duration(milliseconds: 4000),
     );
 
-    rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+    rotation = Tween(begin: 0.0, end: 2 * Math.pi)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.easeInBack));
+
+    opacity = Tween(begin: 0.2, end: 1.0).animate(controller);
 
     controller.addListener(() {
       print('Status ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
-        controller.repeat();
+        // controller.reverse();
+        controller.reset();
       }
     });
 
@@ -60,10 +65,11 @@ class _AnimatedSquareState extends State<AnimatedSquare>
     controller.forward();
     return AnimatedBuilder(
       animation: controller,
-      builder: (BuildContext context, Widget? child) {
+      child: _Rectangle(),
+      builder: (BuildContext context, Widget? childRectangle) {
         return Transform.rotate(
           angle: rotation.value,
-          child: _Rectangle(),
+          child: Opacity(opacity: opacity.value, child: childRectangle),
         );
       },
     );
