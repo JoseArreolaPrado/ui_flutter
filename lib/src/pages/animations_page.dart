@@ -48,7 +48,17 @@ class _AnimatedSquareState extends State<AnimatedSquare>
 
   @override
   Widget build(BuildContext context) {
-    return _Rectangle();
+    //Play
+    controller.forward();
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (BuildContext context, Widget? child) {
+        return Transform.rotate(
+          angle: rotation.value,
+          child: _Rectangle(),
+        );
+      },
+    );
   }
 }
 
