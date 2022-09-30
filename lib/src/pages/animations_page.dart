@@ -6,7 +6,7 @@ class AnimationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: AnimatedSquare(),
       ),
@@ -29,6 +29,7 @@ class _AnimatedSquareState extends State<AnimatedSquare>
 
   late Animation<double> rotation;
   late Animation<double> opacity;
+  late Animation<double> moveToRight;
 
   @override
   void initState() {
@@ -37,8 +38,8 @@ class _AnimatedSquareState extends State<AnimatedSquare>
       duration: const Duration(milliseconds: 4000),
     );
 
-    rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(
-      CurvedAnimation(parent: controller, curve: Curves.easeInBack),
+    rotation = Tween(begin: 0.0, end: 4 * Math.pi).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeOut),
     );
 
     opacity = Tween(begin: 0.2, end: 1.0).animate(
@@ -48,8 +49,11 @@ class _AnimatedSquareState extends State<AnimatedSquare>
       ),
     );
 
+    moveToRight = Tween(begin: 0.0, end: 200.0).animate(
+      CurvedAnimation(parent: controller, curve: Curves.easeOut),
+    );
+
     controller.addListener(() {
-      print('Status ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
         // controller.reverse();
         controller.reset();
@@ -69,13 +73,17 @@ class _AnimatedSquareState extends State<AnimatedSquare>
   Widget build(BuildContext context) {
     //Play
     controller.forward();
+
     return AnimatedBuilder(
       animation: controller,
       child: _Rectangle(),
       builder: (BuildContext context, Widget? childRectangle) {
-        return Transform.rotate(
-          angle: rotation.value,
-          child: Opacity(opacity: opacity.value, child: childRectangle),
+        return Transform.translate(
+          offset: Offset(moveToRight.value, 0),
+          child: Transform.rotate(
+            angle: rotation.value,
+            child: Opacity(opacity: opacity.value, child: childRectangle),
+          ),
         );
       },
     );
