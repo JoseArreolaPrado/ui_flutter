@@ -26,9 +26,9 @@ class AnimatedSquare extends StatefulWidget {
 class _AnimatedSquareState extends State<AnimatedSquare>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
-
   late Animation<double> rotation;
   late Animation<double> opacity;
+  late Animation<double> opacityOut;
   late Animation<double> moveToRight;
   late Animation<double> increase;
 
@@ -39,7 +39,7 @@ class _AnimatedSquareState extends State<AnimatedSquare>
       duration: const Duration(milliseconds: 4000),
     );
 
-    rotation = Tween(begin: 0.0, end: 4 * Math.pi).animate(
+    rotation = Tween(begin: 0.0, end: 2 * Math.pi).animate(
       CurvedAnimation(parent: controller, curve: Curves.easeOut),
     );
 
@@ -50,12 +50,25 @@ class _AnimatedSquareState extends State<AnimatedSquare>
       ),
     );
 
-    moveToRight = Tween(begin: 0.0, end: 300.0).animate(
-      CurvedAnimation(parent: controller, curve: Curves.easeOut),
+    opacityOut = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: const Interval(0.75, 1.0, curve: Curves.easeOut),
+      ),
+    );
+
+    moveToRight = Tween(begin: 0.0, end: 200.0).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.easeOut,
+      ),
     );
 
     increase = Tween(begin: 0.0, end: 3.0).animate(
-      CurvedAnimation(parent: controller, curve: Curves.easeOut),
+      CurvedAnimation(
+        parent: controller,
+        curve: Curves.easeOut,
+      ),
     );
 
     controller.addListener(() {
@@ -88,7 +101,7 @@ class _AnimatedSquareState extends State<AnimatedSquare>
           child: Transform.rotate(
             angle: rotation.value,
             child: Opacity(
-              opacity: opacity.value,
+              opacity: opacity.value - opacityOut.value,
               child: Transform.scale(
                 scale: increase.value,
                 child: childRectangle,
