@@ -15,11 +15,11 @@ class _CirculasProgresBarState extends State<CirculasProgresBar> {
     return Scaffold(
       body: Center(
         child: Container(
+          padding: const EdgeInsets.all(5),
           width: 300,
           height: 300,
-          color: Colors.red,
           child: CustomPaint(
-            painter: _RadialProgress(),
+            painter: _RadialProgress(90),
           ),
         ),
       ),
@@ -28,10 +28,15 @@ class _CirculasProgresBarState extends State<CirculasProgresBar> {
 }
 
 class _RadialProgress extends CustomPainter {
+  final fillPercentage;
+
+  _RadialProgress(this.fillPercentage);
+
   @override
   void paint(Canvas canvas, Size size) {
+    //Full Circle
     final paint = Paint()
-      ..strokeWidth = 10
+      ..strokeWidth = 8
       ..color = Colors.grey
       ..style = PaintingStyle.stroke;
 
@@ -39,6 +44,23 @@ class _RadialProgress extends CustomPainter {
     double radius = min(size.width / 2, size.height / 2);
 
     canvas.drawCircle(center, radius, paint);
+
+    //Arc
+    final paintArc = Paint()
+      ..strokeWidth = 10
+      ..color = Colors.teal
+      ..style = PaintingStyle.stroke;
+
+    //Fill area
+    double arcAngle = 2 * pi * (fillPercentage / 100);
+
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -pi / 2,
+      arcAngle,
+      false,
+      paintArc,
+    );
   }
 
   @override
