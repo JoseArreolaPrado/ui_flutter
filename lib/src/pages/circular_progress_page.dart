@@ -10,16 +10,28 @@ class CirculasProgresBar extends StatefulWidget {
 }
 
 class _CirculasProgresBarState extends State<CirculasProgresBar> {
+  double percentage = 10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.refresh),
+        onPressed: () {
+          percentage += 10;
+          if (percentage > 100) {
+            percentage = 0;
+          }
+          setState(() {});
+        },
+      ),
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(5),
           width: 300,
           height: 300,
           child: CustomPaint(
-            painter: _RadialProgress(90),
+            painter: _RadialProgress(percentage),
           ),
         ),
       ),
