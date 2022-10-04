@@ -29,6 +29,7 @@ class _CircularGraphPageState extends State<CircularGraphPage> {
         width: 300,
         child: RadialProgress(
           percentage: percentage,
+          arcColor: Colors.orange,
         ),
       )),
     );

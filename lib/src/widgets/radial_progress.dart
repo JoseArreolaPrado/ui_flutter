@@ -4,8 +4,18 @@ import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final percentage;
+  final Color arcColor;
+  final Color circleColor;
+  final double arcStrokeWidth;
+  final double circleStrokeWidth;
 
-  RadialProgress({this.percentage});
+  RadialProgress({
+    required this.percentage,
+    this.arcColor = Colors.blue,
+    this.circleColor = Colors.grey,
+    this.arcStrokeWidth = 10.0,
+    this.circleStrokeWidth = 8.0,
+  });
 
   @override
   State<RadialProgress> createState() => _RadialProgressState();
@@ -46,8 +56,13 @@ class _RadialProgressState extends State<RadialProgress>
           width: double.infinity,
           height: double.infinity,
           child: CustomPaint(
-            painter: _RadialProgress((widget.percentage - animationDifference) +
-                (animationDifference * controller.value)),
+            painter: _RadialProgress(
+                (widget.percentage - animationDifference) +
+                    (animationDifference * controller.value),
+                widget.arcColor,
+                widget.circleColor,
+                widget.arcStrokeWidth,
+                widget.circleStrokeWidth),
           ),
         );
       },
@@ -57,15 +72,20 @@ class _RadialProgressState extends State<RadialProgress>
 
 class _RadialProgress extends CustomPainter {
   final fillPercentage;
+  final Color arcColor;
+  final Color circleColor;
+  final double arcStrokeWidth;
+  final double circleStrokeWidth;
 
-  _RadialProgress(this.fillPercentage);
+  _RadialProgress(this.fillPercentage, this.arcColor, this.circleColor,
+      this.arcStrokeWidth, this.circleStrokeWidth);
 
   @override
   void paint(Canvas canvas, Size size) {
     //Full Circle
     final paint = Paint()
-      ..strokeWidth = 8
-      ..color = Colors.grey
+      ..strokeWidth = circleStrokeWidth
+      ..color = circleColor
       ..style = PaintingStyle.stroke;
 
     Offset center = Offset(size.width / 2, size.height / 2);
@@ -75,8 +95,8 @@ class _RadialProgress extends CustomPainter {
 
     //Arc
     final paintArc = Paint()
-      ..strokeWidth = 10
-      ..color = Colors.teal
+      ..strokeWidth = arcStrokeWidth
+      ..color = arcColor
       ..style = PaintingStyle.stroke;
 
     //Fill area
