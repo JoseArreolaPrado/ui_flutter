@@ -96,6 +96,7 @@ class _RadialProgress extends CustomPainter {
     //Arc
     final paintArc = Paint()
       ..strokeWidth = arcStrokeWidth
+      ..strokeCap = StrokeCap.round
       ..color = arcColor
       ..style = PaintingStyle.stroke;
 
