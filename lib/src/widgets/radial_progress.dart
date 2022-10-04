@@ -77,11 +77,25 @@ class _RadialProgress extends CustomPainter {
   final double arcStrokeWidth;
   final double circleStrokeWidth;
 
-  _RadialProgress(this.fillPercentage, this.arcColor, this.circleColor,
-      this.arcStrokeWidth, this.circleStrokeWidth);
+  _RadialProgress(
+    this.fillPercentage,
+    this.arcColor,
+    this.circleColor,
+    this.arcStrokeWidth,
+    this.circleStrokeWidth,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
+    final Rect rect = Rect.fromCircle(center: const Offset(0, 0), radius: 180);
+    final Gradient gradient = LinearGradient(
+      colors: <Color>[
+        Color(0xffc012FF),
+        Color(0xff6D05E8),
+        Colors.red,
+      ],
+    );
+
     //Full Circle
     final paint = Paint()
       ..strokeWidth = circleStrokeWidth
@@ -97,7 +111,8 @@ class _RadialProgress extends CustomPainter {
     final paintArc = Paint()
       ..strokeWidth = arcStrokeWidth
       ..strokeCap = StrokeCap.round
-      ..color = arcColor
+      // ..color = arcColor
+      ..shader = gradient.createShader(rect)
       ..style = PaintingStyle.stroke;
 
     //Fill area
