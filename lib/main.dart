@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_flutter/src/pages/pinterest_mock_menu.dart';
+import 'package:ui_flutter/src/pages/pinterest_mock_menu_page.dart';
 
 void main() => runApp(MyApp());
 

@@ -5,10 +5,15 @@ class PinterestButtons {
   final Function() onPressed;
   final IconData icon;
 
-  PinterestButtons({required this.onPressed, required this.icon});
+  PinterestButtons({
+    required this.onPressed,
+    required this.icon,
+  });
 }
 
 class PinterestMenu extends StatelessWidget {
+  final bool show;
+  PinterestMenu({this.show = true});
   final List<PinterestButtons> items = [
     PinterestButtons(
         onPressed: () {
@@ -35,8 +40,15 @@ class PinterestMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => _MenuModel(),
-        child: _MenuBackground(child: _MenuItems(items)));
+      create: (context) => _MenuModel(),
+      child: AnimatedOpacity(
+        opacity: (show) ? 1 : 0,
+        duration: const Duration(milliseconds: 200),
+        child: _MenuBackground(
+          child: _MenuItems(items),
+        ),
+      ),
+    );
   }
 }
 
