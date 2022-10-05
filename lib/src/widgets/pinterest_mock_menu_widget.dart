@@ -34,7 +34,7 @@ class PinterestMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _MenuBackground(),
+      child: _MenuItems(items),
     );
   }
 }
@@ -58,6 +58,7 @@ class _MenuBackground extends StatelessWidget {
               spreadRadius: -5,
             )
           ]),
+      child: child,
     );
   }
 }
