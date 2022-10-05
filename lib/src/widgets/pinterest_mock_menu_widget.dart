@@ -13,7 +13,15 @@ class PinterestButtons {
 
 class PinterestMenu extends StatelessWidget {
   final bool show;
-  PinterestMenu({this.show = true});
+  final Color backgroundColor;
+  final Color activeColor;
+  final Color inactiveColor;
+  PinterestMenu({
+    this.show = true,
+    this.backgroundColor = Colors.white,
+    this.activeColor = Colors.blue,
+    this.inactiveColor = Colors.blueGrey,
+  });
   final List<PinterestButtons> items = [
     PinterestButtons(
         onPressed: () {
@@ -58,12 +66,13 @@ class _MenuBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Provider.of<_MenuModel>(context).backgroundColor;
     return Container(
       width: 250,
       height: 60,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(100)),
-          color: Colors.white,
+          color: backgroundColor,
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: Colors.black,
@@ -99,6 +108,8 @@ class _PinterestMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = Provider.of<_MenuModel>(context).selectedIndex;
+    final activeColor = Provider.of<_MenuModel>(context).activeColor;
+    final inactiveColor = Provider.of<_MenuModel>(context).inactiveColor;
     return GestureDetector(
       onTap: () {
         Provider.of<_MenuModel>(context, listen: false).selectedIndex = index;
@@ -109,7 +120,7 @@ class _PinterestMenuButton extends StatelessWidget {
         child: Icon(
           item.icon,
           size: (selectedIndex == index) ? 45 : 25,
-          color: (selectedIndex == index) ? Colors.purple : Colors.blueGrey,
+          color: (selectedIndex == index) ? activeColor : inactiveColor,
         ),
       ),
     );
@@ -118,10 +129,31 @@ class _PinterestMenuButton extends StatelessWidget {
 
 class _MenuModel with ChangeNotifier {
   int _selectedIndex = 0;
+  Color _backgroundColor = Colors.white;
+  Color _activeColor = Colors.blue;
+  Color _inactiveColor = Colors.blueGrey;
 
   int get selectedIndex => _selectedIndex;
   set selectedIndex(int index) {
     _selectedIndex = index;
+    notifyListeners();
+  }
+
+  Color get backgroundColor => _backgroundColor;
+  set backgroundColor(Color color) {
+    _backgroundColor = color;
+    notifyListeners();
+  }
+
+  Color get activeColor => _activeColor;
+  set activeColor(Color color) {
+    _activeColor = color;
+    notifyListeners();
+  }
+
+  Color get inactiveColor => _inactiveColor;
+  set inactiveColor(Color color) {
+    _inactiveColor = color;
     notifyListeners();
   }
 }

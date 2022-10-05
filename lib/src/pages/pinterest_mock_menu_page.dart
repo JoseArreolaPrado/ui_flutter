@@ -31,6 +31,7 @@ class _MenuLocation extends StatelessWidget {
         width: screenWidth,
         child: Align(
           child: PinterestMenu(
+            activeColor: Colors.black,
             show: show,
           ),
         ),
