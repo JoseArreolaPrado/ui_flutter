@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_flutter/src/pages/slideshow_page.dart';
+import 'package:ui_flutter/src/pages/pinterest_mock_menu.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Design App',
-      home: SlideShowPage(),
+      home: PinterestPage(),
     );
   }
 }
