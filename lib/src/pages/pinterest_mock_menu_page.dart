@@ -34,6 +34,28 @@ class _MenuLocation extends StatelessWidget {
             backgroundColor: Colors.black,
             activeColor: Colors.blue,
             show: show,
+            items: [
+              PinterestButtons(
+                  onPressed: () {
+                    print('Icon 1');
+                  },
+                  icon: Icons.pie_chart),
+              PinterestButtons(
+                  onPressed: () {
+                    print('Icon 2');
+                  },
+                  icon: Icons.search),
+              PinterestButtons(
+                  onPressed: () {
+                    print('Icon 3');
+                  },
+                  icon: Icons.notifications),
+              PinterestButtons(
+                  onPressed: () {
+                    print('Icon 4');
+                  },
+                  icon: Icons.supervised_user_circle),
+            ],
           ),
         ),
       ),
