@@ -52,9 +52,14 @@ class PinterestMenu extends StatelessWidget {
       child: AnimatedOpacity(
         opacity: (show) ? 1 : 0,
         duration: const Duration(milliseconds: 200),
-        child: _MenuBackground(
-          child: _MenuItems(items),
-        ),
+        child: Builder(builder: (context) {
+          Provider.of<_MenuModel>(context).backgroundColor = backgroundColor;
+          Provider.of<_MenuModel>(context).activeColor = activeColor;
+          Provider.of<_MenuModel>(context).inactiveColor = inactiveColor;
+          return _MenuBackground(
+            child: _MenuItems(items),
+          );
+        }),
       ),
     );
   }
@@ -142,18 +147,15 @@ class _MenuModel with ChangeNotifier {
   Color get backgroundColor => _backgroundColor;
   set backgroundColor(Color color) {
     _backgroundColor = color;
-    notifyListeners();
   }
 
   Color get activeColor => _activeColor;
   set activeColor(Color color) {
     _activeColor = color;
-    notifyListeners();
   }
 
   Color get inactiveColor => _inactiveColor;
   set inactiveColor(Color color) {
     _inactiveColor = color;
-    notifyListeners();
   }
 }
