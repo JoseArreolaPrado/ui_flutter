@@ -66,14 +66,14 @@ class _MenuBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = Provider.of<_MenuModel>(context).backgroundColor;
+    Color backgroundColor = Provider.of<_MenuModel>(context)._backgroundColor;
     return Container(
       width: 250,
       height: 60,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(100)),
           color: backgroundColor,
-          boxShadow: <BoxShadow>[
+          boxShadow: const <BoxShadow>[
             BoxShadow(
               color: Colors.black,
               blurRadius: 10,
