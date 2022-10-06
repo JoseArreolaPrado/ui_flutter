@@ -71,7 +71,7 @@ class _MenuBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = Provider.of<_MenuModel>(context)._backgroundColor;
+    Color backgroundColor = Provider.of<_MenuModel>(context).backgroundColor;
     return Container(
       width: 250,
       height: 60,
@@ -134,9 +134,9 @@ class _PinterestMenuButton extends StatelessWidget {
 
 class _MenuModel with ChangeNotifier {
   int _selectedIndex = 0;
-  Color _backgroundColor = Colors.white;
-  Color _activeColor = Colors.blue;
-  Color _inactiveColor = Colors.blueGrey;
+  Color backgroundColor = Colors.white;
+  Color activeColor = Colors.blue;
+  Color inactiveColor = Colors.blueGrey;
 
   int get selectedIndex => _selectedIndex;
   set selectedIndex(int index) {
@@ -144,18 +144,18 @@ class _MenuModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Color get backgroundColor => _backgroundColor;
-  set backgroundColor(Color color) {
-    _backgroundColor = color;
-  }
+  // Color get backgroundColor => _backgroundColor;
+  // set backgroundColor(Color color) {
+  //   _backgroundColor = color;
+  // }
 
-  Color get activeColor => _activeColor;
-  set activeColor(Color color) {
-    _activeColor = color;
-  }
+  // Color get activeColor => _activeColor;
+  // set activeColor(Color color) {
+  //   _activeColor = color;
+  // }
 
-  Color get inactiveColor => _inactiveColor;
-  set inactiveColor(Color color) {
-    _inactiveColor = color;
-  }
+  // Color get inactiveColor => _inactiveColor;
+  // set inactiveColor(Color color) {
+  //   _inactiveColor = color;
+  // }
 }
