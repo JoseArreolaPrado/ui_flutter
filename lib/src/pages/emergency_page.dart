@@ -5,6 +5,6 @@ import '../widgets/icon_header_widget.dart';
 class EmergencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: IconHeader());
+    return Scaffold(body: IconHeader());
   }
 }
