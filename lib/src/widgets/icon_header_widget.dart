@@ -2,16 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IconHeader extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color1;
+  final Color color2;
+
+  const IconHeader({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    this.color1 = Colors.grey,
+    this.color2 = Colors.blueGrey,
+  });
+
   @override
   Widget build(BuildContext context) {
     Color whiteTranslucid = Colors.white.withOpacity(0.7);
     return Stack(
       children: [
-        const _IconHeaderBackgroubd(),
+        _IconHeaderBackgroubd(
+          color1: this.color1,
+          color2: this.color2,
+        ),
         Positioned(
           top: -50,
           left: -70,
-          child: FaIcon(FontAwesomeIcons.plus,
+          child: FaIcon(this.icon,
               size: 250, color: Colors.white.withOpacity(0.2)),
         ),
         Column(
@@ -21,7 +38,7 @@ class IconHeader extends StatelessWidget {
               width: double.infinity,
             ),
             Text(
-              'Requested',
+              this.subtitle,
               style: TextStyle(
                 fontSize: 20,
                 color: whiteTranslucid,
@@ -29,14 +46,14 @@ class IconHeader extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Medical support',
+              this.title,
               style: TextStyle(
                   fontSize: 25,
                   color: whiteTranslucid,
                   fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            const FaIcon(FontAwesomeIcons.plus, size: 70, color: Colors.white),
+            FaIcon(this.icon, size: 70, color: Colors.white),
           ],
         )
       ],
@@ -45,8 +62,12 @@ class IconHeader extends StatelessWidget {
 }
 
 class _IconHeaderBackgroubd extends StatelessWidget {
+  final Color color1;
+  final Color color2;
   const _IconHeaderBackgroubd({
     Key? key,
+    required this.color1,
+    required this.color2,
   }) : super(key: key);
 
   @override
@@ -54,17 +75,17 @@ class _IconHeaderBackgroubd extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 300,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.red,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(80),
         ),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: <Color>[
-            Color(0xff526bf6),
-            Color(0xff67acf2),
+            this.color1,
+            this.color2,
           ],
         ),
       ),
