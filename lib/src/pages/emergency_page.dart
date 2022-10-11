@@ -7,9 +7,17 @@ import '../widgets/icon_header_widget.dart';
 class EmergencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: ThickButton(),
+        child: ThickButton(
+          icon: FontAwesomeIcons.carCrash,
+          onPress: () {
+            print('Tap');
+          },
+          color1: const Color(0xff6989f5),
+          color2: const Color(0xfff906ef5),
+          text: 'Motor Accident',
+        ),
       ),
     );
   }
