@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_flutter/src/widgets/thick_button.dart';
@@ -49,14 +50,17 @@ class EmergencyPage extends StatelessWidget {
     ];
 
     Iterable itemMap = items
-        .map((item) => ThickButton(
-              text: item.text,
-              onPress: () {
-                print('Something');
-              },
-              icon: item.icon,
-              color1: item.color1,
-              color2: item.color2,
+        .map((item) => FadeInLeft(
+              duration: Duration(microseconds: 400),
+              child: ThickButton(
+                text: item.text,
+                onPress: () {
+                  print('Something');
+                },
+                icon: item.icon,
+                color1: item.color1,
+                color2: item.color2,
+              ),
             ))
         .toList();
 
@@ -66,19 +70,14 @@ class EmergencyPage extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: 200),
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: <Widget>[
                 const SizedBox(height: 80),
                 ...itemMap,
               ],
             ),
           ),
-          const IconHeader(
-            icon: FontAwesomeIcons.plus,
-            title: 'Medical support',
-            subtitle: 'Requrested',
-            color1: Color(0xff526bf6),
-            color2: Color(0xff67acf2),
-          )
+          const PageHeader()
         ],
       ),
     );
@@ -113,12 +112,29 @@ class PageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconHeader(
-      color1: Color(0xff526bf6),
-      color2: Color(0xff67acf2),
-      icon: FontAwesomeIcons.plus,
-      subtitle: 'Requested',
-      title: 'Medical support',
+    return Stack(
+      children: [
+        const IconHeader(
+          color1: Color(0xff526bf6),
+          color2: Color(0xff67acf2),
+          icon: FontAwesomeIcons.plus,
+          subtitle: 'Requested',
+          title: 'Medical support',
+        ),
+        Positioned(
+          right: 0,
+          top: 40,
+          child: RawMaterialButton(
+            onPressed: () {},
+            shape: CircleBorder(),
+            padding: EdgeInsets.all(15),
+            child: FaIcon(
+              FontAwesomeIcons.ellipsisV,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
