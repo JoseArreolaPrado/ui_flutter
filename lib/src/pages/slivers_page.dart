@@ -6,7 +6,47 @@ class SliverPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _MainScroll(),
+      body: Stack(children: [
+        _MainScroll(),
+        Positioned(
+          bottom: -10,
+          right: 0,
+          child: _NewListButton(),
+        ),
+      ]),
+    );
+  }
+}
+
+class _NewListButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return ButtonTheme(
+      child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(const Color(0xffed6762)),
+            shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.only(topLeft: Radius.circular(50))))),
+        onPressed: () {},
+        child: Container(
+          height: size.height * 0.11,
+          width: size.width * 0.7,
+          child: const Center(
+            child: Text(
+              'Create new list',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                letterSpacing: 3,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -44,7 +84,13 @@ class _MainScroll extends StatelessWidget {
               maxHeight: 170,
               minHeight: 200,
             )),
-        SliverList(delegate: SliverChildListDelegate(items))
+        SliverList(
+            delegate: SliverChildListDelegate([
+          ...items,
+          const SizedBox(
+            height: 100,
+          )
+        ]))
       ],
     );
   }
