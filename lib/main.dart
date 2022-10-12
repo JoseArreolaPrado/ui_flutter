@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_flutter/src/pages/emergency_page.dart';
+import 'package:ui_flutter/src/pages/slivers_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Design App',
-      home: EmergencyPage(),
+      home: SliverPages(),
     );
   }
 }
